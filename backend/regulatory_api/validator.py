@@ -1,23 +1,38 @@
 import json
+import sys
 
-class RegulatoryValidator:
+class KaguaValidator:
     def __init__(self):
-        # Database of thousands of registered Kenyan projects
+        # The National Registry of Projects
         self.registry = {
-            "AF-HOUSING-001": {"NCA": "VALID", "NEMA": "VALID", "COUNTY": "APPROVED"},
-            "PVT-DEV-099": {"NCA": "VALID", "NEMA": "EXPIRED", "COUNTY": "APPROVED"}
+            "AF-HOUSING-001": {
+                "nca_status": "VALID",
+                "nema_status": "VALID",
+                "county_permit": "APPROVED",
+                "risk_score": 0.024,
+                "structural_drift": 0.0042
+            },
+            "PVT-MOMBASA-099": {
+                "nca_status": "EXPIRED",
+                "nema_status": "VALID",
+                "county_permit": "SUSPENDED",
+                "risk_score": 0.45,
+                "structural_drift": 0.12
+            }
         }
 
-    def verify_legal_standing(self, project_id):
-        status = self.registry.get(project_id, {"NCA": "MISSING", "NEMA": "MISSING", "COUNTY": "PENDING"})
-        is_legal = all(v == "VALID" or v == "APPROVED" for v in status.values())
+    def check_id(self, project_id):
+        project_id = project_id.upper().strip()
+        data = self.registry.get(project_id)
         
-        return {
-            "project_id": project_id,
-            "legal_standing": "AUTHORIZED" if is_legal else "CEASE_AND_DESIST",
-            "agency_status": status
-        }
+        if data:
+            return {"status": "SUCCESS", "data": data}
+        return {"status": "ERROR", "message": "Project ID not found in National Registry."}
 
 if __name__ == "__main__":
-    v = RegulatoryValidator()
-    print(json.dumps(v.verify_legal_standing("AF-HOUSING-001"), indent=2))
+    validator = KaguaValidator()
+    # If an argument is passed, check it; otherwise, list registry keys
+    if len(sys.argv) > 1:
+        print(json.dumps(validator.check_id(sys.argv[1]), indent=2))
+    else:
+        print(f"Registry initialized with {len(validator.registry)} projects.")
