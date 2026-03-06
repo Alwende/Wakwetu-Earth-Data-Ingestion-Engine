@@ -25,16 +25,19 @@ const App = () => {
   return (
     <div style={{ textAlign: 'center', padding: '40px', fontFamily: 'Segoe UI, sans-serif', color: '#2c3e50' }}>
       <header style={{ marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '2.5em', marginBottom: '5px' }}>🇰🇪 Kukagua AI: Sovereign Compliance</h1>
-        <p style={{ color: '#7f8c8d' }}>Venture Lead: Dan Alwende | Built for Nairobi Urban Resilience</p>
+        <h1 style={{ fontSize: '2.5em', marginBottom: '5px' }}>🏗️ Kagua Mjengo na AI: Sovereign Compliance</h1>
+        <p style={{ color: '#7f8c8d' }}>Venture Lead: Dan Alwende | Engineering Nairobi's Urban Integrity</p>
       </header>
       
       <div style={{ maxWidth: '700px', margin: '0 auto' }}>
         <ComplianceSentinel audit={auditData} />
         
         <div style={{ marginTop: '30px', padding: '20px', background: '#f8f9fa', borderRadius: '8px' }}>
-          <h4>Principal Architect’s Technical Proof</h4>
-          <p style={{ fontSize: '0.9em' }}>Targeting the Kenyan building collapse crisis via serverless <strong>Temporal Change Detection</strong> and <strong>Permit-to-Pixel</strong> verification.</p>
+          <h4>Principal Architect’s Strategic Proof</h4>
+          <p style={{ fontSize: '0.9em' }}>
+            Addressing the Kenyan building collapse crisis through <strong>Temporal Change Detection</strong> 
+            and <strong>Permit-to-Pixel</strong> automated verification.
+          </p>
         </div>
       </div>
     </div>
