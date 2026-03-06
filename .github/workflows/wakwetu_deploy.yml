@@ -5,40 +5,15 @@ on:
     branches: [ main ]
 
 jobs:
-  build_and_deploy:
+  deploy_to_web:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Configure Frontend Package
-        run: |
-          cd frontend
-          # Use python to safely update package.json since sed is failing locally
-          python3 -c "
-          import json
-          with open('package.json', 'r') as f:
-              data = json.load(f)
-          data['homepage'] = 'https://Alwende.github.io/Wakwetu-Earth-Data-Ingestion-Engine'
-          data['scripts']['predeploy'] = 'npm run build'
-          data['scripts']['deploy'] = 'gh-pages -d build'
-          with open('package.json', 'w') as f:
-              json.dump(data, f, indent=2)
-          "
-
-      - name: Install & Build Frontend
-        run: |
-          cd frontend
-          npm install
-          npm run build
-
-      - name: Deploy to GitHub Pages
+      - name: Deploy Static Site to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: frontend/build
+          folder: .
           branch: gh-pages
+          target-folder: /
