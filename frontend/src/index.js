@@ -1,19 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 
-const ComplianceSentinel = ({ audit }) => (
-  <div style={{ background: audit.compliance_status === 'CRITICAL_NON_COMPLIANCE' ? '#ffdada' : '#d4edda', padding: '20px', borderRadius: '12px', border: '2px solid', borderColor: audit.compliance_status === 'CRITICAL_NON_COMPLIANCE' ? '#e74c3c' : '#27ae60', marginTop: '20px' }}>
-    <h2 style={{ color: '#2c3e50', margin: '0 0 10px 0' }}>🛑 {audit.compliance_status.replace('_', ' ')}</h2>
-    <div style={{ textAlign: 'left' }}>
-      <p><strong>Region:</strong> {audit.region}</p>
-      <p><strong>Growth Delta (7-Day):</strong> +{(audit.temporal_delta * 100).toFixed(1)}%</p>
-      <p><strong>Verification:</strong> {audit.recommendation}</p>
-      <p style={{ fontSize: '0.8em', marginTop: '10px' }}><em>Revenue Class: {audit.revenue_tier}</em></p>
-    </div>
-  </div>
-);
-
 const App = () => {
+  const [notified, setNotified] = useState(false);
+
   const auditData = {
     region: "Nairobi North Sector",
     temporal_delta: 0.06,
@@ -22,22 +12,46 @@ const App = () => {
     revenue_tier: "B2G_GOVERNANCE_SIGNAL"
   };
 
+  const handleEnforcement = () => {
+    setNotified(true);
+    console.log("Hati ya Ukaguzi Issued. Notifying NCA Enforcement Division...");
+  };
+
   return (
-    <div style={{ textAlign: 'center', padding: '40px', fontFamily: 'Segoe UI, sans-serif', color: '#2c3e50' }}>
+    <div style={{ textAlign: 'center', padding: '40px', fontFamily: 'Segoe UI, sans-serif', color: '#2c3e50', background: '#f4f7f6', minHeight: '100vh' }}>
       <header style={{ marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '2.5em', marginBottom: '5px' }}>🏗️ Kagua Mjengo na AI: Sovereign Compliance</h1>
-        <p style={{ color: '#7f8c8d' }}>Venture Lead: Dan Alwende | Engineering Nairobi's Urban Integrity</p>
+        <h1 style={{ fontSize: '2.5em', marginBottom: '5px' }}>🏗️ Kagua Mjengo na AI</h1>
+        <p style={{ color: '#7f8c8d' }}>Venture Lead: Dan Alwende | Sovereign Compliance & Enforcement</p>
       </header>
       
-      <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-        <ComplianceSentinel audit={auditData} />
-        
-        <div style={{ marginTop: '30px', padding: '20px', background: '#f8f9fa', borderRadius: '8px' }}>
-          <h4>Principal Architect’s Strategic Proof</h4>
-          <p style={{ fontSize: '0.9em' }}>
-            Addressing the Kenyan building collapse crisis through <strong>Temporal Change Detection</strong> 
-            and <strong>Permit-to-Pixel</strong> automated verification.
-          </p>
+      <div style={{ maxWidth: '750px', margin: '0 auto', background: 'white', padding: '30px', borderRadius: '15px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)' }}>
+        <div style={{ background: '#ffdada', padding: '20px', borderRadius: '12px', border: '2px solid #e74c3c' }}>
+          <h2 style={{ color: '#c0392b', margin: '0 0 10px 0' }}>🚨 CRITICAL NON-COMPLIANCE</h2>
+          <p><strong>Nairobi North Sector:</strong> Unsanctioned Growth Detected (+6.0%)</p>
+          <p style={{ fontSize: '0.9em' }}>Historical Baseline: Feb 2026 | Current: Mar 2026</p>
+        </div>
+
+        <div style={{ marginTop: '30px' }}>
+          {!notified ? (
+            <button 
+              onClick={handleEnforcement}
+              style={{ background: '#2c3e50', color: 'white', border: 'none', padding: '15px 30px', borderRadius: '8px', fontSize: '1em', cursor: 'pointer', fontWeight: 'bold' }}>
+              📜 Generate Hati ya Ukaguzi (Digital Audit)
+            </button>
+          ) : (
+            <div style={{ background: '#27ae60', color: 'white', padding: '15px', borderRadius: '8px', fontWeight: 'bold' }}>
+              ✅ STOP ORDER ISSUED: Notice Sent to NCA & KCB Risk Division
+            </div>
+          )}
+        </div>
+
+        <div style={{ marginTop: '40px', padding: '20px', borderTop: '1px solid #eee', textAlign: 'left' }}>
+          <h4>Venture Economics (B2G/B2B)</h4>
+          <ul>
+            <li><strong>Subscription:</strong> Nairobi County Compliance Sentinel</li>
+            <li><strong>Transaction:</strong> Automated Audit-as-a-Service per Site</li>
+            <li><strong>Risk Mitigation:</strong> Loan-to-Value (LTV) Verification for Financial Partners</li>
+          </ul>
         </div>
       </div>
     </div>
