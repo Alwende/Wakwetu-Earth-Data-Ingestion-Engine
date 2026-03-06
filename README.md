@@ -60,5 +60,5 @@ graph TD
 This project implements **Zero-Inference Rule** protocols for data handling and ensures that all environmental assets are held in sovereign, encrypted storage, independent of external provider availability.
 
 ---
-**Lead Architect:** USER
+**Lead Architect / Project Manager:** Dan Alwende
 **Organization:** Wakwetu Earth-Data Systems
