@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/Wakwetu-Earth-Data-Ingestion-Engine/static/js/main.679f390a.js",
+    "main.js": "/Wakwetu-Earth-Data-Ingestion-Engine/static/js/main.6a0a6280.js",
     "index.html": "/Wakwetu-Earth-Data-Ingestion-Engine/index.html",
-    "main.679f390a.js.map": "/Wakwetu-Earth-Data-Ingestion-Engine/static/js/main.679f390a.js.map"
+    "main.6a0a6280.js.map": "/Wakwetu-Earth-Data-Ingestion-Engine/static/js/main.6a0a6280.js.map"
   },
   "entrypoints": [
-    "static/js/main.679f390a.js"
+    "static/js/main.6a0a6280.js"
   ]
 }
