@@ -2,62 +2,47 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 
 const App = () => {
-  const [notified, setNotified] = useState(false);
-
-  const handleEnforcement = () => {
-    setNotified(true);
-  };
+  const [driftDetected, setDriftDetected] = useState(true);
 
   return (
-    <div style={{ textAlign: 'center', padding: '40px', fontFamily: 'Segoe UI, sans-serif', color: '#2c3e50', background: '#f0f2f5', minHeight: '100vh' }}>
-      <header style={{ marginBottom: '30px', borderBottom: '3px solid #27ae60', display: 'inline-block', paddingBottom: '10px' }}>
+    <div style={{ textAlign: 'center', padding: '40px', fontFamily: 'Segoe UI, sans-serif', color: '#2c3e50', background: '#eef2f3', minHeight: '100vh' }}>
+      <header style={{ marginBottom: '30px' }}>
         <h1 style={{ fontSize: '2.5em', margin: 0 }}>🏗️ Kagua Mjengo na AI</h1>
-        <p style={{ color: '#7f8c8d', fontWeight: 'bold' }}>Sovereign Compliance & Enforcement Division</p>
+        <p style={{ color: '#34495e', fontWeight: 'bold' }}>BIM-to-Orbital Digital Twin Synchronizer</p>
       </header>
       
-      <div style={{ maxWidth: '850px', margin: '0 auto', display: 'grid', gridTemplateColumns: notified ? '1fr 1fr' : '11fr', gap: '20px' }}>
+      <div style={{ maxWidth: '900px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
         
-        {/* Main Alert Card */}
-        <div style={{ background: 'white', padding: '30px', borderRadius: '15px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', textAlign: 'left' }}>
-          <h2 style={{ color: '#e74c3c' }}>🚨 CRITICAL ALERT</h2>
-          <p><strong>Region:</strong> Nairobi North Sector (Zone A-12)</p>
-          <p><strong>Anomaly:</strong> +6.0% Unsanctioned Structural Growth</p>
-          <hr />
-          {!notified ? (
-            <button 
-              onClick={handleEnforcement}
-              style={{ width: '100%', background: '#c0392b', color: 'white', border: 'none', padding: '15px', borderRadius: '8px', fontSize: '1.1em', cursor: 'pointer', fontWeight: 'bold' }}>
-              📜 Issue Legal Stop Order
-            </button>
-          ) : (
-            <div style={{ background: '#27ae60', color: 'white', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
-              ✅ STOP ORDER DISPATCHED
-            </div>
-          )}
+        {/* BIM Data Card */}
+        <div style={{ background: 'white', padding: '25px', borderRadius: '15px', textAlign: 'left', borderTop: '5px solid #3498db' }}>
+          <h3>📐 Permitted BIM Design</h3>
+          <p><strong>Approved Area:</strong> 1,200 m²</p>
+          <p><strong>Structural Height:</strong> 18.5m (Planned)</p>
+          <p><strong>Zoning Limit:</strong> Residential/Commercial Mix</p>
+          <div style={{ height: '100px', background: '#d6eaf8', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#2980b9' }}>
+             [ DESIGN BLUEPRINT OVERLAY ]
+          </div>
         </div>
 
-        {/* Forensic Vault (Appears after Enforcement) */}
-        {notified && (
-          <div style={{ background: '#2c3e50', color: '#ecf0f1', padding: '30px', borderRadius: '15px', textAlign: 'left', fontSize: '0.9em' }}>
-            <h3 style={{ color: '#f1c40f', marginTop: 0 }}>🛡️ Forensic Evidence Vault</h3>
-            <p><strong>Audit ID:</strong> KAGUA-2026-X99</p>
-            <p><strong>Digital Signature:</strong> <code style={{ color: '#3498db' }}>sha256:8f43ac...</code></p>
-            <hr style={{ borderColor: '#444' }} />
-            <p><strong>Stakeholder Alerts:</strong></p>
-            <ul>
-              <li>NCA Enforcement ✅</li>
-              <li>Nairobi County Planning ✅</li>
-              <li>Lending Partner (KCB) ✅</li>
-            </ul>
-            <p style={{ background: '#34495e', padding: '10px', borderRadius: '5px', fontSize: '0.8em' }}>
-              This record is immutable and stored in the Sovereign Data Perimeter.
-            </p>
+        {/* Satellite Sync Card */}
+        <div style={{ background: 'white', padding: '25px', borderRadius: '15px', textAlign: 'left', borderTop: '5px solid #e67e22' }}>
+          <h3>🛰️ Orbital "As-Built" Audit</h3>
+          <p><strong>Detected Area:</strong> 1,310 m²</p>
+          <p><strong>Structural Drift:</strong> <span style={{ color: '#e74c3c', fontWeight: 'bold' }}>+9.17% (EXCEEDED)</span></p>
+          <p><strong>Status:</strong> CRITICAL DEVIATION</p>
+          <div style={{ height: '100px', background: '#fef9e7', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d35400' }}>
+             [ SATELLITE RADIOMETRIC SYNC ]
           </div>
-        )}
+        </div>
       </div>
 
-      <footer style={{ marginTop: '50px', color: '#95a5a6', fontSize: '0.85em' }}>
-        <p>Principal Architect: Dan Alwende | Venture Strategy: Building Safety & Fiscal Integrity</p>
+      <div style={{ marginTop: '30px', background: '#c0392b', color: 'white', padding: '20px', borderRadius: '12px', maxWidth: '900px', margin: '30px auto' }}>
+        <h2 style={{ margin: 0 }}>🚨 ALERT: STRUCTURAL INTEGRITY RISK</h2>
+        <p>Physical construction has deviated by 110 m² from the permitted design. Structural stability cannot be guaranteed.</p>
+      </div>
+
+      <footer style={{ marginTop: '50px', color: '#7f8c8d' }}>
+        <p>Principal Architect: Dan Alwende | Venture Strategy: Engineering Excellence & Urban Safety</p>
       </footer>
     </div>
   );
