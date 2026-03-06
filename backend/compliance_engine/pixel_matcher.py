@@ -1,42 +1,41 @@
 import json
 
-class SovereignComplianceLens:
-    def __init__(self):
-        # Official Database of Approved Permits (NCA & County Planning)
-        self.permit_registry = {
-            "ZONE_A12": {"permit_id": "NCC-2026-001", "authorized_sqm": 1200, "status": "APPROVED"},
-            "ZONE_B05": {"permit_id": "NCC-2026-044", "authorized_sqm": 800, "status": "APPROVED"}
+def calculate_audit(zone_id):
+    # Simulated Regional Data Lake for Nairobi
+    # This ensures searching "KASARANI" vs "PARKLANDS" gives different outcomes
+    registry = {
+        "KASARANI": {
+            "permit_sqm": 1200, 
+            "satellite_sqm": 1550, 
+            "status": "CRITICAL: ILLEGAL EXTENSION",
+            "payout_multiplier": 0,
+            "color": "#c0392b"
+        },
+        "PARKLANDS": {
+            "permit_sqm": 1000, 
+            "satellite_sqm": 998, 
+            "status": "COMPLIANT",
+            "payout_multiplier": 48000,
+            "color": "#27ae60"
         }
-
-    def detect_anomaly(self, zone_id, current_sqm_from_satellite):
-        permit = self.permit_registry.get(zone_id)
-
-        if not permit:
-            return {
-                "signal": "CRITICAL_ANOMALY",
-                "message": f"Illegal Construction Detected in {zone_id}. No permit on file.",
-                "action": "ISSUE_STOP_ORDER_IMMEDIATELY",
-                "severity": "HIGH"
-            }
-
-        deviation = current_sqm_from_satellite - permit['authorized_sqm']
-
-        if deviation > 50:
-            return {
-                "signal": "REGULATORY_DRIFT",
-                "message": f"Structure exceeds permitted footprint by {deviation}sqm.",
-                "action": "RE-INSPECTION_REQUIRED",
-                "severity": "MEDIUM"
-            }
-
-        return {
-            "signal": "COMPLIANT", 
-            "message": "As-Built aligns with Permit.", 
-            "action": "AUTHORIZE_PAYMENT",
-            "severity": "NONE"
-        }
+    }
+    
+    site = registry.get(zone_id.upper())
+    if not site:
+        return {"status": "ILLEGAL / NO PERMIT", "payout": 0, "color": "#c0392b", "drift": "N/A"}
+        
+    variance = (site['satellite_sqm'] - site['permit_sqm']) / site['permit_sqm']
+    payout = site['satellite_sqm'] * site['payout_multiplier']
+    
+    return {
+        "status": site['status'],
+        "payout": payout,
+        "drift": f"{round(variance * 100, 2)}%",
+        "color": site['color']
+    }
 
 if __name__ == "__main__":
-    engine = SovereignComplianceLens()
-    # Scenario: High-Risk construction in Zone C03 (No permit)
-    print(json.dumps(engine.detect_anomaly("ZONE_C03", 500), indent=2))
+    import sys
+    # Use: python backend/compliance_engine/pixel_matcher.py KASARANI
+    zone = sys.argv[1].upper() if len(sys.argv) > 1 else "KASARANI"
+    print(json.dumps(calculate_audit(zone), indent=2))
