@@ -10,3 +10,8 @@
 6. **Storage (Processed):** S3 bucket /processed/ (Cloud Optimized GeoTIFFs).
 7. **Discovery:** Glue Crawler -> Amazon Athena (SQL Schema).
 8. **Visualization:** TerriaJS React Component (frontend/src/EarthDataMap.js).
+
+## Intelligence Layer (Project 11 Expansion)
+- **Engine:** Amazon Bedrock / SageMaker Inference
+- **Metadata Output:** JSON (Stored in /raw/intelligence/)
+- **SQL Discovery:** Athena JOIN between raw metadata and AI-extracted features.
