@@ -1,40 +1,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-const IntelligenceReport = ({ data }) => (
-  <div style={{ background: '#eef2f3', padding: '15.px', borderRadius: '8px', borderLeft: '5px solid #2980b9', marginTop: '20px', textAlign: 'left' }}>
-    <h3 style={{ color: '#2c3e50', marginTop: 0 }}>🧠 Analytical Elicitation: AI Report</h3>
-    <p><strong>Target Region:</strong> {data.region}</p>
-    <p><strong>Urban Density Index:</strong> {data.urban_density_index}</p>
-    <p><strong>Vegetation Cover:</strong> {data.vegetation_cover_pct}</p>
-    <p style={{ color: '#c0392b', fontWeight: 'bold' }}>⚠️ Anomalies: {data.detected_anomalies.join(", ")}</p>
-    <p style={{ fontSize: '0.8em', color: '#7f8c8d' }}>Confidence: {data.inference_confidence} | Auditor: {data.architect_audit_status}</p>
+const ComplianceSentinel = ({ audit }) => (
+  <div style={{ background: audit.compliance_status === 'CRITICAL_NON_COMPLIANCE' ? '#ffdada' : '#d4edda', padding: '20px', borderRadius: '12px', border: '2px solid', borderColor: audit.compliance_status === 'CRITICAL_NON_COMPLIANCE' ? '#e74c3c' : '#27ae60', marginTop: '20px' }}>
+    <h2 style={{ color: '#2c3e50', margin: '0 0 10px 0' }}>🛑 {audit.compliance_status.replace('_', ' ')}</h2>
+    <div style={{ textAlign: 'left' }}>
+      <p><strong>Region:</strong> {audit.region}</p>
+      <p><strong>Growth Delta (7-Day):</strong> +{(audit.temporal_delta * 100).toFixed(1)}%</p>
+      <p><strong>Verification:</strong> {audit.recommendation}</p>
+      <p style={{ fontSize: '0.8em', marginTop: '10px' }}><em>Revenue Class: {audit.revenue_tier}</em></p>
+    </div>
   </div>
 );
 
 const App = () => {
-  const mockAIResponse = {
-    region: "Nairobi Metropolitan (S2A_37MBU)",
-    urban_density_index: 0.74,
-    vegetation_cover_pct: "22%",
-    detected_anomalies: ["Unsanctioned Construction Zone Detected - North Sector"],
-    inference_confidence: "91.4%",
-    architect_audit_status: "VERIFIED_BY_ALWENDE"
+  const auditData = {
+    region: "Nairobi North Sector",
+    temporal_delta: 0.06,
+    compliance_status: "CRITICAL_NON_COMPLIANCE",
+    recommendation: "Immediate Inspection Required - Unsanctioned Foundation Detected",
+    revenue_tier: "B2G_GOVERNANCE_SIGNAL"
   };
 
   return (
-    <div style={{ textAlign: 'center', padding: '40px', fontFamily: 'Segoe UI, Arial' }}>
-      <h1>🌍 Wakwetu Earth-Data Engine</h1>
-      <p><strong>Principal Architect:</strong> Dan Alwende</p>
-      <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-        <div style={{ background: '#27ae60', color: 'white', padding: '10px', borderRadius: '5px', fontWeight: 'bold' }}>
-          🟢 SYSTEM LIVE: Sovereign Ingestion Active
+    <div style={{ textAlign: 'center', padding: '40px', fontFamily: 'Segoe UI, sans-serif', color: '#2c3e50' }}>
+      <header style={{ marginBottom: '40px' }}>
+        <h1 style={{ fontSize: '2.5em', marginBottom: '5px' }}>🇰🇪 Kukagua AI: Sovereign Compliance</h1>
+        <p style={{ color: '#7f8c8d' }}>Venture Lead: Dan Alwende | Built for Nairobi Urban Resilience</p>
+      </header>
+      
+      <div style={{ maxWidth: '700px', margin: '0 auto' }}>
+        <ComplianceSentinel audit={auditData} />
+        
+        <div style={{ marginTop: '30px', padding: '20px', background: '#f8f9fa', borderRadius: '8px' }}>
+          <h4>Principal Architect’s Technical Proof</h4>
+          <p style={{ fontSize: '0.9em' }}>Targeting the Kenyan building collapse crisis via serverless <strong>Temporal Change Detection</strong> and <strong>Permit-to-Pixel</strong> verification.</p>
         </div>
-        <IntelligenceReport data={mockAIResponse} />
-        <hr />
-        <p style={{ fontSize: '0.9em' }}>
-          <strong>Verified Asset:</strong> <code>S2A_37MBU_20170119_0_L2A</code> (207.9 MiB)
-        </p>
       </div>
     </div>
   );
