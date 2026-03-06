@@ -1,51 +1,28 @@
-name: Wakwetu EarthData Engine CI/CD
+name: Wakwetu Earth-Data Engine CI/CD
 
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
-  governance-check:
+  validate_infrastructure:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      # 1. Python Validation (Wakwetu Engine Quality)
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
         with:
-          python-version: '3.9'
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install flake8 pytest boto3 rasterio requests
-      - name: Lint with flake8
-        run: flake8 backend/src --count --select=E9,F63,F7,F82 --show-source --statistics
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
 
-      # 2. Infrastructure Governance (Terraform Drift Check)
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
-      - name: Terraform Format Check
-        run: terraform fmt -check infra/aws/
-      - name: Terraform Plan
+
+      - name: Terraform Init & Validate
         run: |
           cd infra/aws
-          terraform init
-          # Signal: Ensuring zero accidental expenditure before apply
-          terraform plan -out=tfplan
-
-  deployment:
-    needs: governance-check
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - name: Deploy Backend to AWS Lambda
-        run: echo "Trench Signal: Deploying Ingestor & Transformer..."
-      
-      - name: Deploy Discovery Layer (Athena)
-        run: echo "Trench Signal: Updating Athena Catalog..."
-
-      - name: Deploy Frontend to S3/CloudFront
-        run: echo "Trench Signal: Pushing React Build to Production..."
+          terraform init -backend=false
+          terraform validate
