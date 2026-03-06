@@ -12,3 +12,8 @@ To eliminate dependency on external public APIs for real-time analysis by creati
 * **Infrastructure:** 100% Infrastructure-as-Code (Terraform) deployment.
 * **Discovery:** SQL-based metadata elicitation via Amazon Athena.
 * **DevOps:** Fully automated CI/CD pipeline with GitHub Actions.
+
+## Appendix A: Analytical Elicitation Extension (Phase 6)
+**Objective:** Transition from raw data hosting to automated feature extraction.
+**Scope:** Integration of AI-driven urban density indexing and anomaly detection.
+**Success Criteria:** Sub-second discovery of AI-extracted metadata via Athena.
