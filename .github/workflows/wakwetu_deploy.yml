@@ -5,24 +5,40 @@ on:
     branches: [ main ]
 
 jobs:
-  validate_infrastructure:
+  build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          node-version: 18
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-
-      - name: Terraform Init & Validate
+      - name: Configure Frontend Package
         run: |
-          cd infra/aws
-          terraform init -backend=false
-          terraform validate
+          cd frontend
+          # Use python to safely update package.json since sed is failing locally
+          python3 -c "
+          import json
+          with open('package.json', 'r') as f:
+              data = json.load(f)
+          data['homepage'] = 'https://Alwende.github.io/Wakwetu-Earth-Data-Ingestion-Engine'
+          data['scripts']['predeploy'] = 'npm run build'
+          data['scripts']['deploy'] = 'gh-pages -d build'
+          with open('package.json', 'w') as f:
+              json.dump(data, f, indent=2)
+          "
+
+      - name: Install & Build Frontend
+        run: |
+          cd frontend
+          npm install
+          npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: frontend/build
+          branch: gh-pages
