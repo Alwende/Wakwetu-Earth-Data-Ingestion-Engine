@@ -2,71 +2,68 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 
 const App = () => {
-  const [isEnforced, setIsEnforced] = useState(true);
+  const [showLegal, setShowLegal] = useState(true);
 
   return (
-    <div style={{ textAlign: 'center', padding: '20px', fontFamily: 'Segoe UI, sans-serif', color: '#2c3e50', background: '#f0f2f5', minHeight: '100vh' }}>
+    <div style={{ padding: '20px', fontFamily: 'Segoe UI, sans-serif', color: '#2c3e50', background: '#f0f4f7', minHeight: '100vh' }}>
       
-      {/* GLOBAL COMMAND HEADER */}
-      <header style={{ marginBottom: '20px', borderBottom: '5px solid #27ae60', display: 'inline-block', paddingBottom: '10px' }}>
-        <h1 style={{ fontSize: '2.4em', margin: 0 }}>🏗️ Kagua Mjengo na AI</h1>
-        <p style={{ color: '#34495e', fontWeight: 'bold' }}>Sovereign Structural Integrity & Predictive Risk Platform</p>
-        <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', marginTop: '10px' }}>
-           <span style={{ border: '1px solid #27ae60', color: '#27ae60', padding: '2px 10px', borderRadius: '20px', fontSize: '0.8em' }}>📡 LIVE ORBITAL FEED</span>
-           <span style={{ border: '1px solid #2c3e50', color: '#2c3e50', padding: '2px 10px', borderRadius: '20px', fontSize: '0.8em' }}>🛡️ FORENSIC LOGGING ACTIVE</span>
-        </div>
+      {/* HEADER: VENTURE IDENTITY */}
+      <header style={{ textAlign: 'center', marginBottom: '20px' }}>
+        <h1 style={{ margin: 0, fontSize: '2.5em', color: '#2c3e50' }}>🏗️ Kagua Mjengo na AI</h1>
+        <p style={{ margin: '5px 0', fontWeight: 'bold', color: '#27ae60' }}>The Sovereign One-Stop-Shop for Construction Governance</p>
       </header>
 
-      <div style={{ maxWidth: '1300px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '15px' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '15px' }}>
         
-        {/* DATA SOURCE & INFRA */}
-        <div style={{ background: 'white', padding: '15px', borderRadius: '12px', textAlign: 'left', borderTop: '4px solid #7f8c8d' }}>
-          <h5 style={{ margin: '0 0 10px 0', color: '#7f8c8d' }}>📂 INGESTION</h5>
-          <p style={{ fontSize: '0.9em' }}><strong>Asset:</strong> S2A_37MBU</p>
-          <p style={{ fontSize: '0.9em' }}><strong>Payload:</strong> 207.9 MiB</p>
-          <p style={{ fontSize: '0.9em' }}><strong>Infra:</strong> Terraform (AWS)</p>
+        {/* MODULE 1: INFRASTRUCTURE & INGESTION (Project 11 Baseline) */}
+        <div style={{ background: 'white', padding: '15px', borderRadius: '10px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)', borderTop: '4px solid #7f8c8d' }}>
+          <h5 style={{ marginTop: 0, color: '#7f8c8d' }}>📡 ORBITAL INGESTION</h5>
+          <p style={{ fontSize: '0.85em' }}><strong>Asset:</strong> S2A_37MBU_2026</p>
+          <p style={{ fontSize: '0.85em' }}><strong>Payload:</strong> 207.9 MiB GeoTIFF</p>
+          <p style={{ fontSize: '0.85em' }}><strong>Infra:</strong> Terraform / AWS Athena</p>
         </div>
 
-        {/* SPATIAL & BIM SYNC */}
-        <div style={{ background: 'white', padding: '15px', borderRadius: '12px', textAlign: 'left', borderTop: '4px solid #3498db' }}>
-          <h5 style={{ margin: '0 0 10px 0', color: '#2980b9' }}>📐 BIM SYNC</h5>
-          <p style={{ fontSize: '0.9em' }}><strong>Drift:</strong> 0.42% [OK]</p>
-          <p style={{ fontSize: '0.9em' }}><strong>Growth:</strong> +6.0%</p>
-          <p style={{ fontSize: '0.9em' }}><strong>Density:</strong> 0.74 Index</p>
+        {/* MODULE 2: REGULATORY ENFORCEMENT (NCA, NEMA, COUNTY) */}
+        <div style={{ background: '#fff', padding: '15px', borderRadius: '10px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)', borderTop: '4px solid #e67e22' }}>
+          <h5 style={{ marginTop: 0, color: '#d35400' }}>📜 REGULATORY STATUS</h5>
+          <p style={{ fontSize: '0.85em' }}><strong>NCA Reg:</strong> NCA-99283-B ✅</p>
+          <p style={{ fontSize: '0.85em' }}><strong>NEMA EIA:</strong> Licensed ✅</p>
+          <p style={{ fontSize: '0.85em' }}><strong>County Permit:</strong> NCC/PLN/001 ✅</p>
+          <p style={{ fontSize: '0.85em', color: '#27ae60', fontWeight: 'bold' }}>LEGAL TO CONSTRUCT</p>
         </div>
 
-        {/* PREDICTIVE RISK (NEW) */}
-        <div style={{ background: '#fff9db', padding: '15px', borderRadius: '12px', textAlign: 'left', borderTop: '4px solid #f1c40f' }}>
-          <h5 style={{ margin: '0 0 10px 0', color: '#f39c12' }}>🔮 RISK FORECAST</h5>
-          <p style={{ fontSize: '0.9em' }}><strong>30-Day Failure:</strong> 2.4%</p>
-          <p style={{ fontSize: '0.9em' }}><strong>Velocity:</strong> STABLE</p>
-          <p style={{ fontSize: '0.9em', color: '#27ae60', fontWeight: 'bold' }}>TREND: NON-CRITICAL</p>
+        {/* MODULE 3: SPATIAL INTELLIGENCE (BIM & DRIFT) */}
+        <div style={{ background: 'white', padding: '15px', borderRadius: '10px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)', borderTop: '4px solid #3498db' }}>
+          <h5 style={{ marginTop: 0, color: '#2980b9' }}>📐 SPATIAL SYNC</h5>
+          <p style={{ fontSize: '0.85em' }}><strong>BIM Alignment:</strong> 99.58%</p>
+          <p style={{ fontSize: '0.85em' }}><strong>Structural Drift:</strong> 0.42% [OK]</p>
+          <p style={{ fontSize: '0.85em' }}><strong>7-Day Growth:</strong> +6.0%</p>
         </div>
 
-        {/* FORENSICS & LEGAL */}
-        <div style={{ background: '#2c3e50', color: 'white', padding: '15px', borderRadius: '12px', textAlign: 'left' }}>
-          <h5 style={{ margin: '0 0 10px 0', color: '#f1c40f' }}>🛡️ FORENSICS</h5>
-          <p style={{ fontSize: '0.8em' }}><strong>ID:</strong> KAGUA-2026-X99</p>
-          <div style={{ background: '#27ae60', padding: '5px', borderRadius: '4px', textAlign: 'center', fontSize: '0.8em', marginTop: '10px' }}>
-             📜 STOP ORDER ARCHIVED
+        {/* MODULE 4: RISK & FORENSICS (THE SHIELD) */}
+        <div style={{ background: '#2c3e50', color: 'white', padding: '15px', borderRadius: '10px' }}>
+          <h5 style={{ marginTop: 0, color: '#f1c40f' }}>🛡️ FORENSIC VAULT</h5>
+          <p style={{ fontSize: '0.75em' }}><strong>Audit Hash:</strong> sha256:8f43ac...</p>
+          <p style={{ fontSize: '0.75em' }}><strong>Risk (30-Day):</strong> 2.4% Stable</p>
+          <div style={{ background: '#c0392b', padding: '5px', borderRadius: '4px', textAlign: 'center', fontSize: '0.8em', marginTop: '5px' }}>
+             📜 Hati ya Ukaguzi Issued
           </div>
         </div>
 
-        {/* FINTECH EXECUTION BAR (Full Width) */}
-        <div style={{ gridColumn: '1 / span 4', background: 'white', padding: '20px', borderRadius: '15px', textAlign: 'left', borderLeft: '10px solid #27ae60', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
+        {/* FINTECH & MILESTONE (FULL WIDTH) */}
+        <div style={{ gridColumn: '1 / span 4', background: 'white', padding: '20px', borderRadius: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderLeft: '10px solid #27ae60' }}>
           <div>
-            <h3 style={{ color: '#27ae60', margin: 0 }}>💰 MILESTONE AUTHORIZATION</h3>
-            <p style={{ margin: '5px 0' }}>Foundation Phase: <strong>KES 10,000,000.00</strong> approved based on 0.42% drift precision.</p>
+            <h4 style={{ margin: 0, color: '#27ae60' }}>💰 AUTOMATED ESCROW DISBURSEMENT</h4>
+            <p style={{ margin: '5px 0', fontSize: '0.9em' }}>Authorized Payout: <strong>KES 10,000,000.00</strong> | Basis: 100% Regulatory & Spatial Compliance</p>
           </div>
-          <button style={{ background: '#2c3e50', color: 'white', border: 'none', padding: '12px 35px', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
+          <button style={{ background: '#2c3e50', color: 'white', border: 'none', padding: '12px 30px', borderRadius: '5px', fontWeight: 'bold', cursor: 'pointer' }}>
             EXECUTE RTGS
           </button>
         </div>
       </div>
 
-      <footer style={{ marginTop: '40px', padding: '20px', borderTop: '1px solid #dee2e6' }}>
-        <p style={{ fontWeight: 'bold', margin: 0 }}>Principal Architect: Dan Alwende</p>
-        <p style={{ color: '#7f8c8d', fontSize: '0.8em' }}>Venture Intelligence: Solving Construction Integrity at Orbital Scale</p>
+      <footer style={{ marginTop: '30px', textAlign: 'center', color: '#7f8c8d', borderTop: '1px solid #ddd', paddingTop: '10px' }}>
+        <p><strong>Principal Architect: Dan Alwende</strong> | Kagua Mjengo na AI: The Industrial Standard for Urban Integrity</p>
       </footer>
     </div>
   );
