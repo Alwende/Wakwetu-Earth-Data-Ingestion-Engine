@@ -4,56 +4,61 @@ import ReactDOM from 'react-dom/client';
 const App = () => {
   const [notified, setNotified] = useState(false);
 
-  const auditData = {
-    region: "Nairobi North Sector",
-    temporal_delta: 0.06,
-    compliance_status: "CRITICAL_NON_COMPLIANCE",
-    recommendation: "Immediate Inspection Required - Unsanctioned Foundation Detected",
-    revenue_tier: "B2G_GOVERNANCE_SIGNAL"
-  };
-
   const handleEnforcement = () => {
     setNotified(true);
-    console.log("Hati ya Ukaguzi Issued. Notifying NCA Enforcement Division...");
   };
 
   return (
-    <div style={{ textAlign: 'center', padding: '40px', fontFamily: 'Segoe UI, sans-serif', color: '#2c3e50', background: '#f4f7f6', minHeight: '100vh' }}>
-      <header style={{ marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '2.5em', marginBottom: '5px' }}>🏗️ Kagua Mjengo na AI</h1>
-        <p style={{ color: '#7f8c8d' }}>Venture Lead: Dan Alwende | Sovereign Compliance & Enforcement</p>
+    <div style={{ textAlign: 'center', padding: '40px', fontFamily: 'Segoe UI, sans-serif', color: '#2c3e50', background: '#f0f2f5', minHeight: '100vh' }}>
+      <header style={{ marginBottom: '30px', borderBottom: '3px solid #27ae60', display: 'inline-block', paddingBottom: '10px' }}>
+        <h1 style={{ fontSize: '2.5em', margin: 0 }}>🏗️ Kagua Mjengo na AI</h1>
+        <p style={{ color: '#7f8c8d', fontWeight: 'bold' }}>Sovereign Compliance & Enforcement Division</p>
       </header>
       
-      <div style={{ maxWidth: '750px', margin: '0 auto', background: 'white', padding: '30px', borderRadius: '15px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)' }}>
-        <div style={{ background: '#ffdada', padding: '20px', borderRadius: '12px', border: '2px solid #e74c3c' }}>
-          <h2 style={{ color: '#c0392b', margin: '0 0 10px 0' }}>🚨 CRITICAL NON-COMPLIANCE</h2>
-          <p><strong>Nairobi North Sector:</strong> Unsanctioned Growth Detected (+6.0%)</p>
-          <p style={{ fontSize: '0.9em' }}>Historical Baseline: Feb 2026 | Current: Mar 2026</p>
-        </div>
-
-        <div style={{ marginTop: '30px' }}>
+      <div style={{ maxWidth: '850px', margin: '0 auto', display: 'grid', gridTemplateColumns: notified ? '1fr 1fr' : '11fr', gap: '20px' }}>
+        
+        {/* Main Alert Card */}
+        <div style={{ background: 'white', padding: '30px', borderRadius: '15px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', textAlign: 'left' }}>
+          <h2 style={{ color: '#e74c3c' }}>🚨 CRITICAL ALERT</h2>
+          <p><strong>Region:</strong> Nairobi North Sector (Zone A-12)</p>
+          <p><strong>Anomaly:</strong> +6.0% Unsanctioned Structural Growth</p>
+          <hr />
           {!notified ? (
             <button 
               onClick={handleEnforcement}
-              style={{ background: '#2c3e50', color: 'white', border: 'none', padding: '15px 30px', borderRadius: '8px', fontSize: '1em', cursor: 'pointer', fontWeight: 'bold' }}>
-              📜 Generate Hati ya Ukaguzi (Digital Audit)
+              style={{ width: '100%', background: '#c0392b', color: 'white', border: 'none', padding: '15px', borderRadius: '8px', fontSize: '1.1em', cursor: 'pointer', fontWeight: 'bold' }}>
+              📜 Issue Legal Stop Order
             </button>
           ) : (
-            <div style={{ background: '#27ae60', color: 'white', padding: '15px', borderRadius: '8px', fontWeight: 'bold' }}>
-              ✅ STOP ORDER ISSUED: Notice Sent to NCA & KCB Risk Division
+            <div style={{ background: '#27ae60', color: 'white', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
+              ✅ STOP ORDER DISPATCHED
             </div>
           )}
         </div>
 
-        <div style={{ marginTop: '40px', padding: '20px', borderTop: '1px solid #eee', textAlign: 'left' }}>
-          <h4>Venture Economics (B2G/B2B)</h4>
-          <ul>
-            <li><strong>Subscription:</strong> Nairobi County Compliance Sentinel</li>
-            <li><strong>Transaction:</strong> Automated Audit-as-a-Service per Site</li>
-            <li><strong>Risk Mitigation:</strong> Loan-to-Value (LTV) Verification for Financial Partners</li>
-          </ul>
-        </div>
+        {/* Forensic Vault (Appears after Enforcement) */}
+        {notified && (
+          <div style={{ background: '#2c3e50', color: '#ecf0f1', padding: '30px', borderRadius: '15px', textAlign: 'left', fontSize: '0.9em' }}>
+            <h3 style={{ color: '#f1c40f', marginTop: 0 }}>🛡️ Forensic Evidence Vault</h3>
+            <p><strong>Audit ID:</strong> KAGUA-2026-X99</p>
+            <p><strong>Digital Signature:</strong> <code style={{ color: '#3498db' }}>sha256:8f43ac...</code></p>
+            <hr style={{ borderColor: '#444' }} />
+            <p><strong>Stakeholder Alerts:</strong></p>
+            <ul>
+              <li>NCA Enforcement ✅</li>
+              <li>Nairobi County Planning ✅</li>
+              <li>Lending Partner (KCB) ✅</li>
+            </ul>
+            <p style={{ background: '#34495e', padding: '10px', borderRadius: '5px', fontSize: '0.8em' }}>
+              This record is immutable and stored in the Sovereign Data Perimeter.
+            </p>
+          </div>
+        )}
       </div>
+
+      <footer style={{ marginTop: '50px', color: '#95a5a6', fontSize: '0.85em' }}>
+        <p>Principal Architect: Dan Alwende | Venture Strategy: Building Safety & Fiscal Integrity</p>
+      </footer>
     </div>
   );
 };
