@@ -4,6 +4,10 @@ on:
   push:
     branches: [ main ]
 
+# This block grants the automated runner permission to write to the repo
+permissions:
+  contents: write
+
 jobs:
   deploy_to_web:
     runs-on: ubuntu-latest
@@ -16,4 +20,3 @@ jobs:
         with:
           folder: .
           branch: gh-pages
-          target-folder: /
